@@ -1,0 +1,16 @@
+# Godot generated files
+.godot/
+
+# Generated QA output
+.qa/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Temporary/log files
+*.tmp
+*.log
+
+# Documentation previews do not need Godot import sidecars
+/media/*.import

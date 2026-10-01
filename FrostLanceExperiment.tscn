@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/FrostLanceExperiment.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/FrostLanceParticles.gd" id="2_particles"]
+[ext_resource type="Script" path="res://scripts/FrostLanceGroundFX.gd" id="3_ground_fx"]
+[ext_resource type="Script" path="res://scripts/FrostLanceFeedback.gd" id="4_feedback"]
+
+[node name="FrostLanceExperiment" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="CameraRig" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+current = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+
+[node name="FrostLanceFX" type="Node3D" parent="."]
+
+[node name="Crystals" type="Node3D" parent="FrostLanceFX"]
+
+[node name="CrystalVariantA" type="MultiMeshInstance3D" parent="FrostLanceFX/Crystals"]
+
+[node name="CrystalVariantB" type="MultiMeshInstance3D" parent="FrostLanceFX/Crystals"]
+
+[node name="CrystalVariantC" type="MultiMeshInstance3D" parent="FrostLanceFX/Crystals"]
+
+[node name="Particles" type="Node3D" parent="FrostLanceFX"]
+script = ExtResource("2_particles")
+
+[node name="Mist" type="GPUParticles3D" parent="FrostLanceFX/Particles"]
+
+[node name="Shards" type="GPUParticles3D" parent="FrostLanceFX/Particles"]
+
+[node name="Glitter" type="GPUParticles3D" parent="FrostLanceFX/Particles"]
+
+[node name="GroundFX" type="Node3D" parent="FrostLanceFX"]
+script = ExtResource("3_ground_fx")
+
+[node name="FrostPatchPool" type="Node3D" parent="FrostLanceFX/GroundFX"]
+
+[node name="ImpactFrost" type="MeshInstance3D" parent="FrostLanceFX/GroundFX"]
+
+[node name="Shockwave" type="MeshInstance3D" parent="FrostLanceFX/GroundFX"]
+
+[node name="ImpactFX" type="Node3D" parent="FrostLanceFX"]
+
+[node name="FrostBurst" type="MeshInstance3D" parent="FrostLanceFX/ImpactFX"]
+
+[node name="Feedback" type="Node" parent="FrostLanceFX"]
+script = ExtResource("4_feedback")
+
+[node name="DynamicLight" type="OmniLight3D" parent="FrostLanceFX/Feedback"]
+light_color = Color(0.498, 0.831, 1, 1)
+light_energy = 0.0
+light_specular = 0.65
+omni_range = 13.0
+omni_attenuation = 1.65
+shadow_enabled = false
+visible = false
+
+[node name="DebugOrigin" type="Marker3D" parent="."]
+
+[node name="FeedbackCanvas" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="BloomOverlay" type="ColorRect" parent="FeedbackCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="ScreenFlash" type="ColorRect" parent="FeedbackCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.918, 0.98, 1, 0)
+
+[node name="DebugCanvas" type="CanvasLayer" parent="."]
+
+[node name="DebugLabel" type="Label" parent="DebugCanvas"]
+offset_left = 20.0
+offset_top = 18.0
+offset_right = 330.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(0.86, 0.95, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "Frost Lance Phase 1"
